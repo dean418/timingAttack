@@ -20,7 +20,7 @@ async function checkPassword(input) {
 
 	//convert input to integers
 	input = Object.keys(input).map((num) => {
-			return parseInt(input[num], 10);
+		return parseInt(input[num], 10);
 	});
 
 	//check each number in the input against the correct pin
