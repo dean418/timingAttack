@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 //correct pin
-const correct = [16, 7, 42, 9, 2];
+const correct = [16, 7, 42, 9, 68];
 
 
 //stop the event loop for a given amount of time
@@ -13,7 +13,6 @@ function sleep(time) {
 		}, time)
 	});
 }
-
 
 async function checkPassword(input) {
 	let time = 0;
