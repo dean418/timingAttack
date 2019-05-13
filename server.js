@@ -20,17 +20,13 @@ async function checkPassword(input) {
 
 	//convert input to integers
 	input = Object.keys(input).map((num) => {
-		try {
-			return parseInt(input[num]);
-		} catch(e) {
-			result = false;
-		}
+			return parseInt(input[num], 10);
 	});
 
 	//check each number in the input against the correct pin
 	// and increment the time variable 
-	for(let i = 0; i < input.length; i++) {
-		if(input[i] === correct[i]) {
+	for (let i = 0; i < input.length; i++) {
+		if (input[i] === correct[i]) {
 			time += 0.45;
 		} else {
 			result = false;
@@ -38,7 +34,7 @@ async function checkPassword(input) {
 	}
 
 	// prevent revealing the length of the pin
-	if(input.length !== correct.length) {
+	if (input.length !== correct.length) {
 		result = false;
 	}
 
@@ -46,10 +42,10 @@ async function checkPassword(input) {
 	return result;
 }
 
-app.get("/check", async(req, res) => {
+app.get("/check", async (req, res) => {
 	let result = await checkPassword(req.query);
 
-	if(result) {
+	if (result) {
 		res.send("you are the true 1337 h4x0r");
 	} else {
 		res.send("incorrect pin");
