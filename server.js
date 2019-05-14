@@ -4,7 +4,7 @@ const app = express();
 
 
 //correct pin
-const correct = [16, 7, 42, 9, 68];
+const correct = [pin goes here];
 
 
 //stop the event loop for a given amount of time
