@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+
+
 //correct pin
 const correct = [16, 7, 42, 9, 68];
 
@@ -46,7 +48,7 @@ app.get("/check", async (req, res) => {
 	let result = await checkPassword(req.query);
 
 	if (result) {
-		res.send("you are the true 1337 h4x0r");
+		res.send("██████  ██  ██  ▄▄▄       ███▄ ▄███  █████\n██       ██  ██  ████▄     ██ ▀█▀ ██  █   ▀\n  ██▄    ██▀▀██  ██  ▀█▄   ██     ██  ███\n     ██  ██  ██  ██▄▄▄▄██  ██     ██  ██  ▄\n██████   ██  ██  ██    ██  ██     ██   ████");
 	} else {
 		res.send("incorrect pin");
 	}
@@ -54,5 +56,6 @@ app.get("/check", async (req, res) => {
 
 let port = process.env.PORT || 1337;
 
-
 app.listen(port);
+
+                                             
