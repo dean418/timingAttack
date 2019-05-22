@@ -4,7 +4,7 @@ const app = express();
 app.use(express.static(__dirname + '/public'));
 
 //correct pin
-const correct = [8, 2, 0, 6];
+const correct = ["pin goes here"];
 
 //stop the event loop for a given amount of time
 function sleep(time) {
@@ -25,7 +25,7 @@ async function checkPassword(input) {
 	// and increment the time variable 
 	for (let i = 0; i < input.length; i++) {
 		if (input[i] == correct[i]) {
-			time += 0.50;
+			time += 0.35;
 		} else {
 			result = false;
 		}
