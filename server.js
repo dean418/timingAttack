@@ -1,11 +1,10 @@
 const express = require("express");
 const app = express();
 
-
+app.use(express.static(__dirname + '/public'));
 
 //correct pin
-const correct = [pin goes here];
-
+const correct = [8, 2, 0, 6];
 
 //stop the event loop for a given amount of time
 function sleep(time) {
@@ -20,16 +19,13 @@ async function checkPassword(input) {
 	let time = 0;
 	result = true;
 
-	//convert input to integers
-	input = Object.keys(input).map((num) => {
-		return parseInt(input[num], 10);
-	});
+	input = input.pin.split("");
 
 	//check each number in the input against the correct pin
 	// and increment the time variable 
 	for (let i = 0; i < input.length; i++) {
-		if (input[i] === correct[i]) {
-			time += 0.45;
+		if (input[i] == correct[i]) {
+			time += 0.50;
 		} else {
 			result = false;
 		}
@@ -44,11 +40,16 @@ async function checkPassword(input) {
 	return result;
 }
 
+app.get('/', (req, res, next) => {
+	res.render('index');
+})
+
 app.get("/check", async (req, res) => {
+	console.log(req.query)
 	let result = await checkPassword(req.query);
 
 	if (result) {
-		res.send("██████  ██  ██  ▄▄▄       ███▄ ▄███  █████\n██       ██  ██  ████▄     ██ ▀█▀ ██  █   ▀\n  ██▄    ██▀▀██  ██  ▀█▄   ██     ██  ███\n     ██  ██  ██  ██▄▄▄▄██  ██     ██  ██  ▄\n██████   ██  ██  ██    ██  ██     ██   ████");
+		res.send("Egg and bacon\nEgg, sausage and bacon\nEgg and Spam\nEgg, bacon and Spam\nEgg, bacon, sausage and Spam\nSpam, bacon, sausage and Spam\nSpam, egg, Spam, Spam, bacon and Spam\nSpam, Spam, Spam, egg and Spam\nSpam, Sausage, Spam, Spam, Spam, Bacon, Spam, Tomato and Spam\nSpam, Spam, Spam, Spam, Spam, Spam, baked beans, Spam, Spam, Spam and Spam")
 	} else {
 		res.send("incorrect pin");
 	}
@@ -57,5 +58,3 @@ app.get("/check", async (req, res) => {
 let port = process.env.PORT || 1337;
 
 app.listen(port);
-
-                                             
