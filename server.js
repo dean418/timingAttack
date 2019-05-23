@@ -21,6 +21,7 @@ async function checkPassword(input) {
 
 	input = input.pin.split('');
 
+	//parse the input as an integer
 	input = Object.keys(input).map((num) => {
 		return parseInt(input[num], 10);
 	});

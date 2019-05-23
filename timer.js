@@ -1,27 +1,41 @@
-const { PerformanceObserver, performance } = require('perf_hooks');
-const request = require("request"); 
+const {PerformanceObserver, performance} = require('perf_hooks');
+const request = require("request");
 const {promisify} = require("util");
 
-let input = process.argv[2];
 let promiseRequest = promisify(request)
 
-const observer = new PerformanceObserver((items) => {
-  console.log(items.getEntries()[0].duration);
-  performance.clearMarks();
+//set up the observer
+const observer = new PerformanceObserver(() => {
+	performance.clearMarks();
 });
-observer.observe({ entryTypes: ['measure'] });
+observer.observe({entryTypes: ['measure']});
 
-performance.mark('start');
+async function check(input) {
+	//start the timer
+	performance.mark('start');
+	
+	//get the time when the function runs
+	let start = performance.now();
 
-async function check() {
+	//send a request to to the server with the user input
 	let url = `http://localhost:1337/check?pin=${input}`;
-
 	let response = await promiseRequest(url);
+	response = response.body;
 
-	console.log(response.body)
+	//get the time when the functin ends
+	let end = performance.now();
 
+	//get the time between the start and end
+	let finish = end - start;
+
+	//end the timer
 	performance.mark('end');
 	performance.measure('start to end', 'start', 'end');
+
+	return {
+		response,
+		finish
+	}
 };
 
-module.exports = check
+module.exports = check;
