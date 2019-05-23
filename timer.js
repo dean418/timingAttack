@@ -24,4 +24,4 @@ async function check() {
 	performance.measure('start to end', 'start', 'end');
 };
 
-check();
+module.exports = check
