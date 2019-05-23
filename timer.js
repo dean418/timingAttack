@@ -18,7 +18,7 @@ async function check(input) {
 	let start = performance.now();
 
 	//send a request to to the server with the user input
-	let url = `http://localhost:1337/check?pin=${input}`;
+	let url = `https://timing-attack.herokuapp.com/check?pin=${input}`;
 	let response = await promiseRequest(url);
 	response = response.body;
 
