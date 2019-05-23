@@ -4,7 +4,7 @@ const app = express();
 app.use(express.static(__dirname + '/public'));
 
 //correct pin
-const correct = [8, 2, 6, 0, 5, 9];
+const correct = ["pin goes here"];
 
 //stop the event loop for a given amount of time
 function sleep(time) {
